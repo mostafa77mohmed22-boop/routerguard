@@ -1,0 +1,22 @@
+# Personal configuration — never commit
+config.yaml
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+
+# RouterGuard runtime data
+data/*.db
+data/reports/
+logs/
+*.log
+
+# OS / editors
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

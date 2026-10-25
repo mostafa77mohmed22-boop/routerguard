@@ -1,0 +1,13 @@
+# RouterGuard dependencies
+# ثبّت بـ:  pip install -r requirements.txt
+
+selenium>=4.15
+webdriver-manager>=4.0.0
+Flask>=3.0
+PyYAML>=6.0
+requests>=2.31
+plyer>=2.1
+
+# --- اختياري ---
+# reportlab>=4.0      # تصدير تقارير PDF
+# speedtest-cli>=2.1  # قياس السرعة الدوري

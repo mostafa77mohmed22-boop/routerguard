@@ -1,0 +1,93 @@
+# ============================================================
+# RouterGuard — ملف الإعدادات (انسخه إلى config.yaml وعدّله)
+# انسخ:  copy config.example.yaml config.yaml   (ويندوز)
+# القيم الحساسة: ضعها هنا أو عبر متغيرات البيئة بصيغة env:VAR_NAME
+# مثال: password: env:ROUTER_PASSWORD
+# أو متغير بيئة مباشر: ROUTERGUARD__ROUTER__PASSWORD
+# ============================================================
+
+router:
+  url: "http://192.168.1.1"
+  # ⚠️ غيّر اسم المستخدم وكلمة المرور الافتراضية من إعدادات الراوتر نفسه!
+  username: "admin"
+  password: "admin"
+  timeout: 15
+
+devices:
+  # أسماء أجهزتك المسموحة (مطابقة جزئية غير حساسة لحالة الأحرف)
+  allowed:
+    - "MyPhone"
+    - "MyLaptop"
+  # عناوين MAC مسموحة بصيغة AA:BB:CC:DD:EE:FF (اختياري، أدق من الاسم)
+  allowed_macs: []
+  # أجهزة ضيوف معروفة — مسموحة لكن تُسجَّل كزائر
+  visitors: []
+  visitors_macs: []
+  # قائمة سوداء: أي MAC هنا يُعتبر محظوراً فوراً
+  blacklist: []
+  blacklist_macs: []
+
+scan:
+  interval_seconds: 180
+  headless: true          # false = نافذة مرئية (للتشخيص فقط)
+  driver_path: ""         # مسار chromedriver.exe يدوي (اختياري) — مثال: "chromedriver.exe" بجانب main.py
+                         # اتركه فارغاً للتنزيل التلقائي عبر webdriver-manager
+  keep_browser_open_on_error_seconds: 60
+
+internet:
+  enabled: true
+  gateway: "192.168.1.1"   # يُفحص بالـ ping
+  dns_targets:
+    - "8.8.8.8"
+    - "1.1.1.1"
+  speedtest_enabled: false  # يتطلب حزمة speedtest-cli
+  speedtest_interval_minutes: 60
+
+night_guard:
+  enabled: false
+  start: "23:00"            # بصيغة HH:MM
+  end: "06:00"
+  auto_block: false         # true = محاولة حظر تلقائي عبر الراوتر
+                            # false = تنبيه عالي الأولوية فقط
+
+alerts:
+  sound: true
+  desktop: true
+  escalation:
+    enabled: true
+    repeat_minutes: 5
+    max_repeats: 6
+  telegram:
+    enabled: false
+    bot_token: "env:TELEGRAM_BOT_TOKEN"
+    chat_id: "env:TELEGRAM_CHAT_ID"
+  email:
+    enabled: false
+    smtp_host: "smtp.gmail.com"
+    smtp_port: 587
+    username: "env:ALERT_EMAIL_USER"
+    password: "env:ALERT_EMAIL_PASS"
+    from_addr: "env:ALERT_EMAIL_USER"
+    to_addrs: []
+  webhook:
+    enabled: false
+    url: "env:ALERT_WEBHOOK_URL"
+
+dashboard:
+  enabled: true
+  host: "127.0.0.1"
+  port: 8080
+
+storage:
+  path: "data/routerguard.db"
+  retention_days: 90
+
+reports:
+  daily_enabled: true
+  daily_time: "23:59"
+  weekly_enabled: true
+  weekly_day: "friday"   # saturday..friday
+
+logging:
+  level: "INFO"          # DEBUG | INFO | WARNING | ERROR
+  file: "logs/routerguard.log"

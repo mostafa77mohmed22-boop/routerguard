@@ -1,0 +1,27 @@
+# RouterGuard — خدمة systemd (لينكس)
+#
+# التثبيت:
+#   sudo cp routerguard.service /etc/systemd/system/
+#   sudo systemctl daemon-reload
+#   sudo systemctl enable --now routerguard
+#
+# ملاحظة: غيّر المسارات أدناه (/opt/router-guard) لتناسب مكان مشروعك،
+# وغيّر User=root إلى مستخدم عادي إن لم تكن الصلاحيات العليا لازمة.
+
+[Unit]
+Description=RouterGuard - Router monitoring service
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+# المسار الكامل لمجلد المشروع — عدّله حسب تثبيتك
+WorkingDirectory=/opt/router-guard
+# الأمر التشغيلي: المراقبة الخلفية (استبدل main.py dashboard للوحة فقط)
+ExecStart=/usr/bin/python3 /opt/router-guard/main.py run
+Restart=always
+RestartSec=10
+User=root
+
+[Install]
+WantedBy=multi-user.target
