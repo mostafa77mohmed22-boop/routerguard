@@ -8,6 +8,10 @@ Built with Python, Selenium, Flask, and SQLite. Includes a demo mode with fake d
 
 ![Python](https://img.shields.io/badge/python-3.10+-blue) ![License](https://img.shields.io/badge/license-MIT-green)
 
+![RouterGuard dashboard — demo data](Dashboard%20demo.png)
+
+*The Arabic RTL dashboard in demo mode — 3 devices online, one unknown device flagged.*
+
 ## Features
 
 - **Intruder detection** — periodic scans of the router's DHCP client table; devices are classified as allowed / visitor / unknown / blocked
